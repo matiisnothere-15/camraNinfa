@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['bebedero', 'comedero', 'ninfa']
+
+roboflow:
+  workspace: monitorninfas20
+  project: monitorninfas
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/monitorninfas20/monitorninfas/dataset/2

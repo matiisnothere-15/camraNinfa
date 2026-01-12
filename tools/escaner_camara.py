@@ -5,7 +5,7 @@ print("--------------------------------")
 
 # URL sacada de tu captura de pantalla
 # DroidCam usa HTTP, no RTSP
-url_droidcam = "http://192.168.1.172:4747/video"
+url_droidcam = "http://192.168.0.6:4747/video"
 
 print(f"📡 Conectando a: {url_droidcam}")
 cap = cv2.VideoCapture(url_droidcam)

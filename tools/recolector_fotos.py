@@ -20,7 +20,7 @@ print("---------------------------------------")
 # --- CAMBIO REALIZADO AQUÍ ---
 # Conexión directa a tu celular (IP 192.168.1.172)
 print("🎥 Conectando al celular...")
-cap = cv2.VideoCapture("http://192.168.1.172:4747/mjpegfeed?640x480")
+cap = cv2.VideoCapture("http://192.168.0.6:4747/mjpegfeed?640x480")
 
 if not cap.isOpened():
     print("❌ Error: No se pudo conectar a DroidCam.")

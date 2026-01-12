@@ -8,7 +8,7 @@ def iniciar_monitoreo():
     model = YOLO('yolov8n.pt') 
 
     # --- CAMBIO IMPORTANTE: Usamos '/mjpegfeed' en vez de '/video' ---
-    url_droidcam = "http://192.168.1.172:4747/mjpegfeed?640x480"
+    url_droidcam = "http://192.168.0.6:4747/mjpegfeed?640x480"
     print(f"🎥 Conectando a DroidCam: {url_droidcam}")
     
     cap = cv2.VideoCapture(url_droidcam)
