@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+*.pdb
+*.so
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Secrets
+config/credenciales.py
+
+# Ultralytics / runs
+runs/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,6 +1,6 @@
 import cv2
 import time
-from ultralytics import YOLO
+from ultralytics import YOLO  # type: ignore
 from modulos.base_datos import insertar_registro
 
 def iniciar_monitoreo():

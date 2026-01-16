@@ -1,16 +1,55 @@
+import os
+
 import pyodbc
-from config.credenciales import AZURE_CONFIG
+
+
+def _cargar_config_azure() -> dict:
+    """Carga la configuración de Azure SQL.
+
+    Prioridad:
+    1) Variables de entorno (recomendado)
+    2) config.credenciales.AZURE_CONFIG (si existe localmente)
+    """
+
+    server = os.getenv("AZURE_SERVER")
+    database = os.getenv("AZURE_DATABASE")
+    username = os.getenv("AZURE_USERNAME")
+    password = os.getenv("AZURE_PASSWORD")
+    driver = os.getenv("AZURE_DRIVER", "{ODBC Driver 18 for SQL Server}")
+
+    if server and database and username and password:
+        return {
+            "server": server,
+            "database": database,
+            "username": username,
+            "password": password,
+            "driver": driver,
+        }
+
+    try:
+        from config.credenciales import AZURE_CONFIG  # type: ignore
+
+        return AZURE_CONFIG
+    except Exception:
+        return {}
 
 def obtener_conexion():
     """Crea y devuelve la conexión a Azure"""
+    config = _cargar_config_azure()
+    if not config:
+        print(
+            "❌ Azure no configurado. Define AZURE_SERVER, AZURE_DATABASE, AZURE_USERNAME, AZURE_PASSWORD (y opcional AZURE_DRIVER)."
+        )
+        return None
+
     try:
         conn_str = (
-            f"DRIVER={AZURE_CONFIG['driver']};"
-            f"SERVER={AZURE_CONFIG['server']};"
+            f"DRIVER={config['driver']};"
+            f"SERVER={config['server']};"
             f"PORT=1433;"
-            f"DATABASE={AZURE_CONFIG['database']};"
-            f"UID={AZURE_CONFIG['username']};"
-            f"PWD={AZURE_CONFIG['password']};"
+            f"DATABASE={config['database']};"
+            f"UID={config['username']};"
+            f"PWD={config['password']};"
             "Encrypt=yes;TrustServerCertificate=yes;Connection Timeout=30;"
         )
         return pyodbc.connect(conn_str)
